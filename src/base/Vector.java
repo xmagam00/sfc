@@ -3,10 +3,43 @@ package base;
 /**
  * Created by <xmagam00@stud.fit.vutbr.cz> on 10.11.2014.
  */
+
+import java.awt.*;
+
+import static constants.RceConstants.*;
+
 public class Vector {
 
     private int x = 0;
     private int y = 0;
+    private Color clazzColor;
+    private Color circleColor;
+
+    public Color getClazzColor() {
+        return clazzColor;
+    }
+
+    public void setClazzColor(Color clazzColor) {
+        this.clazzColor = clazzColor;
+    }
+
+    public Color getCircleColor() {
+        return circleColor;
+    }
+
+    public void setCircleColor(Color circleColor) {
+        this.circleColor = circleColor;
+    }
+
+    public int getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(int clazz) {
+        this.clazz = clazz;
+    }
+
+    private int clazz;
 
     public Vector() {
 
