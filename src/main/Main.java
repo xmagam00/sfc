@@ -11,9 +11,9 @@ public class Main {
 
     private static Logger LOG = Logger.getLogger(Main.class.getName());
 
+    //hlavna metoda, z ktorej sa spusta aplikacia
     public static void main(String[] args) {
 
-        LOG.info("main.Main method");
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -25,9 +25,6 @@ public class Main {
                 window.setVisible(true);
             }
         });
-
-
-
 
 
     }

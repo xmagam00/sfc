@@ -8,37 +8,19 @@ import java.awt.*;
 
 import static constants.RceConstants.*;
 
+/**
+ * Trieda, ktora reprezentuje dany vstupny vektor
+ */
 public class Vector {
 
+    //x-ova suradnica
     private int x = 0;
+    //y-ova suradnice
     private int y = 0;
+    //farba pre danu triedu vektoru
     private Color clazzColor;
+    //farba pre danu triedu hypegule (kruznice)
     private Color circleColor;
-
-    public Color getClazzColor() {
-        return clazzColor;
-    }
-
-    public void setClazzColor(Color clazzColor) {
-        this.clazzColor = clazzColor;
-    }
-
-    public Color getCircleColor() {
-        return circleColor;
-    }
-
-    public void setCircleColor(Color circleColor) {
-        this.circleColor = circleColor;
-    }
-
-    public int getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(int clazz) {
-        this.clazz = clazz;
-    }
-
     private int clazz;
 
     public Vector() {
@@ -64,5 +46,30 @@ public class Vector {
 
     public int getY() {
         return y;
+    }
+
+
+    public Color getClazzColor() {
+        return clazzColor;
+    }
+
+    public void setClazzColor(Color clazzColor) {
+        this.clazzColor = clazzColor;
+    }
+
+    public Color getCircleColor() {
+        return circleColor;
+    }
+
+    public void setCircleColor(Color circleColor) {
+        this.circleColor = circleColor;
+    }
+
+    public int getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(int clazz) {
+        this.clazz = clazz;
     }
 }
