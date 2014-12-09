@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
     //Logger pre logovanie
     private static Logger LOG = Logger.getLogger(MainWindow.class.getName());
     //vstupne textove pole
-    JTextField textField = new JTextField("10", 20);
+    JTextField textField = new JTextField("20", 20);
     //kresliace platno
     private PaintCanvas canvas;
     //labe pre cas behu algoritmu
@@ -196,7 +196,16 @@ public class MainWindow extends JFrame {
                         canvas.forwardNeuros.add(canvas.allNeuros.get(canvas.forwardNeuros.size()));
                     } catch (Exception ex) {
                         canvas.forwardNeuros.remove(canvas.forwardNeuros.size() - 1);
-                        canvas.forwardNeuros.add(canvas.allNeuros.get(canvas.forwardNeuros.size()));
+                        try {
+                            canvas.forwardNeuros.add(canvas.allNeuros.get(canvas.forwardNeuros.size()));
+                        } catch (Exception ex2) {
+                            canvas.forwardNeuros.remove(canvas.forwardNeuros.size() - 2);
+                            canvas.forwardNeuros = new ArrayList<Neuron>();
+                            for (Neuron tmpBack : canvas.backNeuros) {
+                                canvas.forwardNeuros.add(tmpBack);
+                            }
+                            canvas.forwardNeuros.add(canvas.allNeuros.get(canvas.forwardNeuros.size()));
+                        }
                     }
 
                     canvas.backNeuros = new ArrayList<Neuron>();
@@ -267,6 +276,21 @@ public class MainWindow extends JFrame {
                     LOG.info("Chyba vo vstupnych datach");
                     return;
                 }
+                if (Double.parseDouble(textField.getText()) <= 10) {
+                    JDialog dialog = new JDialog();
+                    dialog.setVisible(true);
+                    dialog.setSize(300, 100);
+                    JLabel errorLabel = new JLabel("Chybná hodnota polomeru");
+                    dialog.add(errorLabel);
+                    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                    dialog.setLocation(dim.width / 2 - dialog.getSize().width / 2, dim.height / 2 - dialog.getSize().height / 2);
+                    buttonReset.setEnabled(true);
+                    button.setEnabled(true);
+                    canvas.setAlgorithmRun(false);
+                    LOG.info("Chyba vo vstupnych datach");
+                    return;
+                }
+
                 canvas.paintNeuros = new ArrayList<Neuron>();
                 //indikuj spustenie algoritmu
                 canvas.setAlgorithmRun(true);
@@ -293,7 +317,7 @@ public class MainWindow extends JFrame {
                                     "x =" + neuron1.getX() + " y=" + neuron1.getY() + " a bodom" +
                                     " so suradnicami x=" + neuron.getX() + " y=" + neuron.getY());
                             //pokial sa bod nachadza v danej hyperguly
-                            distance += 10;
+
                             if (Double.compare(distance, neuron1.getRadius()) <= 0) {
                                 //porovnaj triedy
                                 if (neuron1.getClazz() == neuron.getClazz()) {
@@ -340,7 +364,7 @@ public class MainWindow extends JFrame {
                     }
                 } while (modif);
                 final long duration = System.nanoTime() - startTime;
-                timeLabel.setText("Čas behu " + Double.toString((double) duration / 1000000.0) + " milisek.");
+                timeLabel.setText("Čas behu " + Double.toString(Math.round((double) duration / 1000000.0)) + " milisek.");
                 //prirad neurony
                 for (Neuron backNeuron : canvas.allNeuros) {
                     canvas.backNeuros.add(backNeuron);
